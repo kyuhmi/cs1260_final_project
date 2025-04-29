@@ -1,0 +1,21 @@
+{
+  "name": "Meat",
+  "inventory": [
+    {
+      "name": "Beef",
+      "price": 20.0
+    },
+    {
+      "name": "Chicken",
+      "price": 15.12
+    },
+    {
+      "name": "Pork",
+      "price": 18.0
+    },
+    {
+      "name": "Definitely Not Human Meat (TM)",
+      "price": 2000.0
+    }
+  ]
+}
