@@ -80,7 +80,6 @@ class OrderingApp:
             else:
                 break
 
-
     def get_department_from_user(self):
         """
         Prompts the user to select a department from the available list.
@@ -149,6 +148,9 @@ class OrderingApp:
         Args:
             filepaths (List[str]): A list of filepaths to JSON files containing department data.
         """
+        if len(filepaths) == 0:
+            return # nothing to do
+
         for filepath in filepaths:
             try:
                 with open(filepath, 'r') as file:
