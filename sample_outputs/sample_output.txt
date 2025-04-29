@@ -1,0 +1,140 @@
+Script started on 2025-04-29 14:51:20-07:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="73" LINES="46"]
+]0;kyuho@linux-g14:~/Documents/Syncthing-Docs/org-mode/School-Notes/2025-S2/CS1260_Python_For_Beginners/projects/final_project[?2004h
+[1;36mfinal_project[0m on [1;35m master[0m [1;31m[+?][0m via [1;33m🐍 v3.13.3 [0m
+[1;32m❯[0m python main.py 
+[?2004l=== Select Department ===
+  1. Fruits
+  2. Vegetables
+  3. Dairy
+  4. Bakery
+  5. Meat
+Enter choice: 1
+=== Select Item ===
+  1. Apple - $0.99 each
+  2. Banana - $1.11 each
+  3. Orange - $1.50 each
+  4. Grapes - $2.49 each
+  5. Strawberry - $3.99 each
+  6. Done selecting items
+Enter choice: 1
+Enter number of Apple you want: 200
+=== Select Item ===
+  1. Apple - $0.99 each
+  2. Banana - $1.11 each
+  3. Orange - $1.50 each
+  4. Grapes - $2.49 each
+  5. Strawberry - $3.99 each
+  6. Done selecting items
+Enter choice: 3
+Enter number of Orange you want: 5
+=== Select Item ===
+  1. Apple - $0.99 each
+  2. Banana - $1.11 each
+  3. Orange - $1.50 each
+  4. Grapes - $2.49 each
+  5. Strawberry - $3.99 each
+  6. Done selecting items
+Enter choice: 1
+Enter number of Apple you want: 1
+=== Select Item ===
+  1. Apple - $0.99 each
+  2. Banana - $1.11 each
+  3. Orange - $1.50 each
+  4. Grapes - $2.49 each
+  5. Strawberry - $3.99 each
+  6. Done selecting items
+Enter choice: 6
+Enter customer name: horse
+
+Customer: horse
+Department: Fruits
+2025-04-29 14:51:40
+=================
+Apple (201) = $198.99
+Orange (5) = $7.50
+=================
+Total: $206.49
+
+Written to file.
+
+Would you like to make another order? [y/n]: y
+=== Select Department ===
+  1. Fruits
+  2. Vegetables
+  3. Dairy
+  4. Bakery
+  5. Meat
+Enter choice: 5
+=== Select Item ===
+  1. Beef - $20.00 each
+  2. Chicken - $15.12 each
+  3. Pork - $18.00 each
+  4. Definitely Not Human Meat (TM) - $2000.00 each
+  5. Done selecting items
+Enter choice: 3
+Enter number of Pork you want: 4
+=== Select Item ===
+  1. Beef - $20.00 each
+  2. Chicken - $15.12 each
+  3. Pork - $18.00 each
+  4. Definitely Not Human Meat (TM) - $2000.00 each
+  5. Done selecting items
+Enter choice: 4
+Enter number of Definitely Not Human Meat (TM) you want: 100
+=== Select Item ===
+  1. Beef - $20.00 each
+  2. Chicken - $15.12 each
+  3. Pork - $18.00 each
+  4. Definitely Not Human Meat (TM) - $2000.00 each
+  5. Done selecting items
+Enter choice: 5
+Enter customer name: horse
+
+Customer: horse
+Department: Meat
+2025-04-29 14:52:05
+=================
+Pork (4) = $72.00
+Definitely Not Human Meat (TM) (100) = $200000.00
+=================
+Total: $200072.00
+
+Written to file.
+
+Would you like to make another order? [y/n]: n
+]0;kyuho@linux-g14:~/Documents/Syncthing-Docs/org-mode/School-Notes/2025-S2/CS1260_Python_For_Beginners/projects/final_project[?2004h
+[1;36mfinal_project[0m on [1;35m master[0m [1;31m[+?][0m via [1;33m🐍 v3.13.3 [0mtook [1;33m41s[0m 
+[1;32m❯[0m ls
+[?2004l[1;34mdepartments[0m         [1;33mmain.py[0m            [1;34msrc[0m
+grocery_orders.txt  sample_output.txt
+]0;kyuho@linux-g14:~/Documents/Syncthing-Docs/org-mode/School-Notes/2025-S2/CS1260_Python_For_Beginners/projects/final_project[?2004h
+[1;36mfinal_project[0m on [1;35m master[0m [1;31m[+?][0m via [1;33m🐍 v3.13.3 [0m
+[1;32m❯[0m cat grocery_orders.txt 
+[?2004l]10;?]11;?[c[38;2;131;148;150m───────┬─────────────────────────────────────────────────────────────────[0m[m
+       [38;2;131;148;150m│ [0mFile: [1mgrocery_orders.txt[0m[m
+[38;2;131;148;150m───────┼─────────────────────────────────────────────────────────────────[0m[m
+[38;2;131;148;150m   1[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mCustomer: horse[0m[m
+[38;2;131;148;150m   2[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mDepartment: Fruits[0m[m
+[38;2;131;148;150m   3[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m2025-04-29 14:51:40[0m[m
+[38;2;131;148;150m   4[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m=================[0m[m
+[38;2;131;148;150m   5[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mApple (201) = $198.99[0m[m
+[38;2;131;148;150m   6[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mOrange (5) = $7.50[0m[m
+[38;2;131;148;150m   7[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m=================[0m[m
+[38;2;131;148;150m   8[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mTotal: $206.49[0m[m
+[38;2;131;148;150m   9[0m   [38;2;131;148;150m│[0m [m
+[38;2;131;148;150m  10[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mCustomer: horse[0m[m
+[38;2;131;148;150m  11[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mDepartment: Meat[0m[m
+[38;2;131;148;150m  12[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m2025-04-29 14:52:05[0m[m
+[38;2;131;148;150m  13[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m=================[0m[m
+[38;2;131;148;150m  14[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mPork (4) = $72.00[0m[m
+[38;2;131;148;150m  15[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mDefinitely Not Human Meat (TM) (100) = $200000.00[0m[m
+[38;2;131;148;150m  16[0m   [38;2;131;148;150m│[0m [38;2;248;248;242m=================[0m[m
+[38;2;131;148;150m  17[0m   [38;2;131;148;150m│[0m [38;2;248;248;242mTotal: $200072.00[0m[m
+[38;2;131;148;150m  18[0m   [38;2;131;148;150m│[0m [m
+[38;2;131;148;150m───────┴─────────────────────────────────────────────────────────────────[0m[m
+[K]0;kyuho@linux-g14:~/Documents/Syncthing-Docs/org-mode/School-Notes/2025-S2/CS1260_Python_For_Beginners/projects/final_project[?2004h
+[1;36mfinal_project[0m on [1;35m master[0m [1;31m[+?][0m via [1;33m🐍 v3.13.3 [0m
+[1;32m❯[0m [?2004l
+exit
+
+Script done on 2025-04-29 14:52:16-07:00 [COMMAND_EXIT_CODE="0"]
