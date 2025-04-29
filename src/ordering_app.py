@@ -34,7 +34,7 @@ class OrderingApp:
         self.item_quantities = dict()
         self.receipt_output_file = receipt_output_file
         self.departments = []
-        self.load_departments(departments_base_dir)
+        self._load_departments(departments_base_dir)
 
     def application_routine(self):
         """
@@ -46,10 +46,10 @@ class OrderingApp:
             return
 
         while True:
-            department = self.get_department_from_user()
+            department = self._get_department_from_user()
 
             while True:
-                item = self.get_item_from_department(department)
+                item = self._get_item_from_department(department)
                 if item is None:
                     break # done selecting items
 
@@ -73,7 +73,7 @@ class OrderingApp:
 
                 # print receipt and write it to a file.
                 print(f"\n{receipt}\n")
-                self.write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True)
+                self._write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True)
                 print("Written to file.\n")
 
             # prompt order again
@@ -83,7 +83,7 @@ class OrderingApp:
             else:
                 break
 
-    def get_department_from_user(self):
+    def _get_department_from_user(self):
         """
         Prompts the user to select a department from the available list.
 
@@ -93,7 +93,7 @@ class OrderingApp:
         return get_option_from_user("Select Department", enumerate_list_to_dict(self.departments))
 
     @staticmethod
-    def get_item_from_department(department: Department):
+    def _get_item_from_department(department: Department):
         """
         Prompts the user to select an item from the given department.
 
@@ -103,11 +103,11 @@ class OrderingApp:
         Returns:
             OrderItem: The OrderItem object selected by the user, or None if the user is done selecting items.
         """
-        item = get_option_from_user("Select Item", OrderingApp.make_department_item_menu_dict(department))
+        item = get_option_from_user("Select Item", OrderingApp._make_department_item_menu_dict(department))
         return item if item is not ITEM_SELECTION_END_STR else None
 
     @staticmethod
-    def make_department_item_menu_dict(department: Department):
+    def _make_department_item_menu_dict(department: Department):
         """
         Creates a menu dictionary of items from the given department for user selection.
 
@@ -123,7 +123,7 @@ class OrderingApp:
         return menu_dict
 
     @staticmethod
-    def write_to_file(filepath:str, data:str, append=True):
+    def _write_to_file(filepath:str, data:str, append=True):
         """
         Writes the given data to a file.
 
@@ -144,7 +144,7 @@ class OrderingApp:
             print(f"Error writing to file: {e}")
             return False
 
-    def load_departments(self, department_base_filepath: str):
+    def _load_departments(self, department_base_filepath: str):
         """
         Loads department data from JSON files found within the specified directory.
         Each JSON file should represent a department and contain its name and inventory.
