@@ -38,17 +38,20 @@ class OrderingApp:
                     else:
                         self.item_quantities[item] = item_quantity
 
-            # get customer name and make obj
-            customer_name = get_customer_name()
-            customer = Customer(customer_name)
+            if len(self.item_quantities) == 0:
+                print("Order cancelled.")
+            else:
+                # get customer name and make obj
+                customer_name = get_customer_name()
+                customer = Customer(customer_name)
 
-            # create receipt
-            receipt = Receipt(department, self.item_quantities, customer)
+                # create receipt
+                receipt = Receipt(department, self.item_quantities, customer)
 
-            # print reciept and write it to a file.
-            print(f"\n{receipt}\n")
-            self.write_to_file(RECEIPT_FILE_NAME, receipt.__str__() + "\n\n", True)
-            print("Written to file.\n")
+                # print reciept and write it to a file.
+                print(f"\n{receipt}\n")
+                self.write_to_file(RECEIPT_FILE_NAME, receipt.__str__() + "\n\n", True)
+                print("Written to file.\n")
 
             # prompt order again
             if prompt_order_again():
