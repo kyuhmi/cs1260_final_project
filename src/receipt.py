@@ -1,5 +1,3 @@
-from itertools import count
-
 from src.customer import Customer
 from src.department import Department
 from src.order_item import OrderItem

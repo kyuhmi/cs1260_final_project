@@ -6,37 +6,40 @@ from src.menus import *
 from src.department import Department
 from src.order_item import OrderItem
 from src.receipt import Receipt
+from src.utils import get_json_files_in_dir
 
 ITEM_SELECTION_END_STR = "Done selecting items"
 
 class OrderingApp:
     """
     A class that simulates a grocery ordering application.
+    Allows users to select departments, add items to their order, specify quantities,
+    and finalize the order, generating a receipt.
 
     Attributes:
-        departments (List[Department]): A list of departments available in the store.
-        item_quantities (dict): A dictionary storing the quantities of each item in the current order.
+        departments (List[Department]): A list of Department objects available in the store.
+        item_quantities (dict): A dictionary storing the quantities of each OrderItem in the current order. The keys are OrderItem objects and the values are the corresponding quantities.
         receipt_output_file (str): The file path where receipts will be written.
     """
-    def __init__(self, receipt_output_file: str = "grocery_orders.txt"):
+    def __init__(self, departments_base_dir: str = "departments", receipt_output_file: str = "grocery_orders.txt"):
         """
-        Initializes the OrderingApp with an empty list of departments, an empty item quantities dictionary,
-        and a specified receipt output file.
+        Initializes the OrderingApp.
 
         Args:
+            departments_base_dir (str, optional): The directory containing JSON files that define the departments and their inventory.
+                Defaults to "departments".
             receipt_output_file (str, optional): The name of the file to write receipts to.
                 Defaults to "grocery_orders.txt".
         """
-        self.departments = []
         self.item_quantities = dict()
         self.receipt_output_file = receipt_output_file
+        self.departments = []
+        self.load_departments(departments_base_dir)
 
     def application_routine(self):
         """
         The main application routine that guides the user through the ordering process.
-        It allows the user to select departments, add items to their order, specify quantities,
-        and finalize the order, generating a receipt.  The routine loops, allowing multiple orders
-        until the user quits.
+        The routine loops, allowing multiple orders until the user quits.
         """
         if len(self.departments) == 0:
             print("No departments available.")
@@ -85,7 +88,7 @@ class OrderingApp:
         Prompts the user to select a department from the available list.
 
         Returns:
-            Department: The department selected by the user.
+            Department: The Department object selected by the user.
         """
         return get_option_from_user("Select Department", enumerate_list_to_dict(self.departments))
 
@@ -98,7 +101,7 @@ class OrderingApp:
             department (Department): The department from which to select an item.
 
         Returns:
-            OrderItem: The item selected by the user, or None if the user is done selecting items.
+            OrderItem: The OrderItem object selected by the user, or None if the user is done selecting items.
         """
         item = get_option_from_user("Select Item", OrderingApp.make_department_item_menu_dict(department))
         return item if item is not ITEM_SELECTION_END_STR else None
@@ -106,7 +109,7 @@ class OrderingApp:
     @staticmethod
     def make_department_item_menu_dict(department: Department):
         """
-        Creates a menu dictionary of items from the given department.
+        Creates a menu dictionary of items from the given department for user selection.
 
         Args:
             department (Department): The department to create the menu from.
@@ -130,7 +133,7 @@ class OrderingApp:
             append (bool, optional): Whether to append to the file or overwrite it. Defaults to True.
 
         Returns:
-            bool: True if the write was successful, False otherwise.
+            bool: True if the file write was successful, False otherwise.
         """
         try:
             mode = 'a' if append else 'w'
@@ -141,13 +144,15 @@ class OrderingApp:
             print(f"Error writing to file: {e}")
             return False
 
-    def load_departments(self, filepaths: List[str]):
+    def load_departments(self, department_base_filepath: str):
         """
-        Loads department data from JSON files specified by the given filepaths.
+        Loads department data from JSON files found within the specified directory.
+        Each JSON file should represent a department and contain its name and inventory.
 
         Args:
-            filepaths (List[str]): A list of filepaths to JSON files containing department data.
+            department_base_filepath (str): The path to the directory containing the department JSON files.
         """
+        filepaths = get_json_files_in_dir(department_base_filepath)
         if len(filepaths) == 0:
             return # nothing to do
 
