@@ -1,0 +1,17 @@
+{
+  "name": "Vegetables",
+  "inventory": [
+    {
+      "name": "Tomato",
+      "price": 0.79
+    },
+    {
+      "name": "Lettuce",
+      "price": 1.99
+    },
+    {
+      "name": "Carrot",
+      "price": 0.50
+    }
+  ]
+}

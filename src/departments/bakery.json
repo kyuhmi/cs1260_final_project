@@ -1,0 +1,17 @@
+{
+  "name": "Bakery",
+  "inventory": [
+    {
+      "name": "Bread",
+      "price": 2.75
+    },
+    {
+      "name": "Croissant",
+      "price": 1.75
+    },
+    {
+      "name": "Muffin",
+      "price": 2.25
+    }
+  ]
+}

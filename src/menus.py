@@ -2,7 +2,6 @@ from typing import Any, List
 
 from src.order_item import OrderItem
 
-
 def get_option_from_user(menu_header: str, options_dict: dict[int, Any]):
     """Function to print out a menu with options for a user to pick from."""
     print(f"=== {menu_header} ===")
@@ -27,12 +26,24 @@ def get_item_quantity(item: OrderItem):
     while True:
         try:
             quantity = int(input(f"Enter number of {item.name} you want: ").strip())
-            return quantity
+            if quantity < 0:
+                print("Negative numbers are invalid. Try again.")
+                continue
+            else:
+                return quantity
         except ValueError:
             print("Could not parse number. Try again.")
 
 def get_customer_name():
     return input("Enter customer name: ").strip()
+
+def prompt_order_again():
+    while True:
+        user_input = input("Would you like to make another order? [y/n]: ").strip()
+        if user_input.lower() in ["y", "n"]:
+            return True if user_input.lower() == "y" else False
+        else:
+            print("Invalid input. Try again.")
 
 def enumerate_list_to_dict(input_list: List):
     """Function to get an enumerated dictionary (1 indexed) given a list. Integers are keys."""

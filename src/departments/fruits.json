@@ -1,0 +1,25 @@
+{
+  "name": "Fruits",
+  "inventory": [
+    {
+      "name": "Apple",
+      "price": 0.99
+    },
+    {
+      "name": "Banana",
+      "price": 1.11
+    },
+    {
+      "name": "Orange",
+      "price": 1.50
+    },
+    {
+      "name": "Grapes",
+      "price": 2.49
+    },
+    {
+      "name": "Strawberry",
+      "price": 3.99
+    }
+  ]
+}

@@ -2,12 +2,13 @@ from typing import List
 import json
 
 from src.customer import Customer
-from src.menus import get_option_from_user, enumerate_list_to_dict, get_item_quantity, get_customer_name
+from src.menus import *
 from src.department import Department
 from src.order_item import OrderItem
 from src.receipt import Receipt
 
 ITEM_SELECTION_END_STR = "Done selecting items"
+RECEIPT_FILE_NAME = "grocery_orders.txt"
 
 class OrderingApp:
     def __init__(self):
@@ -15,33 +16,49 @@ class OrderingApp:
         self.item_quantities = dict()
 
     def application_routine(self):
-        department = self.get_department()
-        item = None
-        item_quantity = 0
+        if len(self.departments) == 0:
+            print("No departments available.")
+            return
 
         while True:
-            item = self.get_item_from_department(department)
-            if item is None:
-                break # done selecting items
+            department = self.get_department_from_user()
+            item = None
+            item_quantity = 0
 
-            item_quantity = get_item_quantity(item)
-            if item_quantity > 0:
-                # non-zero quantity, add quantity to the current count in order
-                if item in self.item_quantities.keys():
-                    self.item_quantities[item] = self.item_quantities[item] + item_quantity
-                else:
-                    self.item_quantities[item] = item_quantity
+            while True:
+                item = self.get_item_from_department(department)
+                if item is None:
+                    break # done selecting items
 
-        # get customer name and make obj
-        customer_name = get_customer_name()
-        customer = Customer(customer_name)
+                item_quantity = get_item_quantity(item)
+                if item_quantity > 0:
+                    # non-zero quantity, add quantity to the current count in order
+                    if item in self.item_quantities.keys():
+                        self.item_quantities[item] = self.item_quantities[item] + item_quantity
+                    else:
+                        self.item_quantities[item] = item_quantity
 
-        # create receipt
-        receipt = Receipt(department, self.item_quantities, customer)
-        print(receipt)
+            # get customer name and make obj
+            customer_name = get_customer_name()
+            customer = Customer(customer_name)
+
+            # create receipt
+            receipt = Receipt(department, self.item_quantities, customer)
+
+            # print reciept and write it to a file.
+            print(f"\n{receipt}\n")
+            self.write_to_file(RECEIPT_FILE_NAME, receipt.__str__() + "\n\n", True)
+            print("Written to file.\n")
+
+            # prompt order again
+            if prompt_order_again():
+                self.item_quantities.clear()
+                continue
+            else:
+                break
 
 
-    def get_department(self):
+    def get_department_from_user(self):
         return get_option_from_user("Select Department", enumerate_list_to_dict(self.departments))
 
     @staticmethod
@@ -54,6 +71,17 @@ class OrderingApp:
         menu_dict = enumerate_list_to_dict(department.inventory)
         menu_dict[len(menu_dict) + 1] = ITEM_SELECTION_END_STR
         return menu_dict
+
+    @staticmethod
+    def write_to_file(filepath:str, data:str, append=False):
+        try:
+            mode = 'a' if append else 'w'
+            with open(filepath, mode) as file:
+                file.write(data)
+            return True
+        except Exception as e:
+            print(f"Error writing to file: {e}")
+            return False
 
     def load_departments(self, filepaths: List[str]):
         for filepath in filepaths:

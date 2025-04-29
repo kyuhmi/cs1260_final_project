@@ -8,13 +8,10 @@ import datetime
 
 class Receipt:
     def __init__(self, department: Department, item_quantities: dict[OrderItem, int], customer: Customer):
-        self.item_quantities = item_quantities
+        self.item_quantities = {k:v for k, v in item_quantities.items()}
         self.department = department
         self.customer = customer
         self.timestamp = datetime.datetime.now()
-
-    def write_to_file(self, filepath: str):
-        pass
 
     def __str__(self):
         build_str = f"Customer: {self.customer}\nDepartment: {self.department}\n{self.timestamp.strftime("%Y-%m-%d %H:%M:%S")}"
