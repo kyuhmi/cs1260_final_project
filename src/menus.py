@@ -39,9 +39,8 @@ def get_customer_name():
         name = input("Enter customer name: ").strip()
         if len(name) == 0:
             print("Name must not be blank. Try again.")
-            continue
         else:
-            break
+            return name
 
 def prompt_order_again():
     while True:

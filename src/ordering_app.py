@@ -8,12 +8,12 @@ from src.order_item import OrderItem
 from src.receipt import Receipt
 
 ITEM_SELECTION_END_STR = "Done selecting items"
-RECEIPT_FILE_NAME = "grocery_orders.txt"
 
 class OrderingApp:
-    def __init__(self):
+    def __init__(self, receipt_output_file: str = "grocery_orders.txt"):
         self.departments = []
         self.item_quantities = dict()
+        self.receipt_output_file = receipt_output_file
 
     def application_routine(self):
         if len(self.departments) == 0:
@@ -48,9 +48,9 @@ class OrderingApp:
                 # create receipt
                 receipt = Receipt(department, self.item_quantities, customer)
 
-                # print reciept and write it to a file.
+                # print receipt and write it to a file.
                 print(f"\n{receipt}\n")
-                self.write_to_file(RECEIPT_FILE_NAME, receipt.__str__() + "\n\n", True)
+                self.write_to_file(self.receipt_output_file, receipt.__str__() + "\n\n", True)
                 print("Written to file.\n")
 
             # prompt order again

@@ -19,7 +19,7 @@ class Receipt:
         cost_acc = 0.0
         for item, quantity in self.item_quantities.items():
             cost = item.price * quantity
-            build_str += f"\n{item.name} x {quantity} = ${cost:.2f}"
+            build_str += f"\n{item.name} ({quantity}) = ${cost:.2f}"
             cost_acc += cost
         build_str += "\n================="
         build_str += f"\nTotal: ${cost_acc:.2f}"
