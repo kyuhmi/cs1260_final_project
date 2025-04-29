@@ -2,8 +2,17 @@ from typing import Any, List
 
 from src.order_item import OrderItem
 
-def get_option_from_user(menu_header: str, options_dict: dict[int, Any]):
-    """Function to print out a menu with options for a user to pick from."""
+def get_option_from_user(menu_header: str, options_dict: dict[int, Any]) -> Any:
+    """Presents a menu to the user and retrieves their selection.
+
+    Args:
+        menu_header: The title of the menu to display.
+        options_dict: A dictionary where keys are integer options and values are the
+                      corresponding selectable items.
+
+    Returns:
+        The value associated with the user's selected option from the options_dict.
+    """
     print(f"=== {menu_header} ===")
     ordered_options = sorted(options_dict.items())
     while True:
@@ -22,7 +31,15 @@ def get_option_from_user(menu_header: str, options_dict: dict[int, Any]):
             print("Could not parse number. Try again.")
             continue
 
-def get_item_quantity(item: OrderItem):
+def get_item_quantity(item: OrderItem) -> int:
+    """Prompts the user to enter the quantity of a specific item.
+
+    Args:
+        item: The OrderItem object for which the quantity is being requested.
+
+    Returns:
+        The validated quantity of the item entered by the user as an integer.
+    """
     while True:
         try:
             quantity = int(input(f"Enter number of {item.name} you want: ").strip())
@@ -34,7 +51,12 @@ def get_item_quantity(item: OrderItem):
         except ValueError:
             print("Could not parse number. Try again.")
 
-def get_customer_name():
+def get_customer_name() -> str:
+    """Prompts the user to enter the customer's name.
+
+    Returns:
+        The validated customer name entered by the user.
+    """
     while True:
         name = input("Enter customer name: ").strip()
         if len(name) == 0:
@@ -42,7 +64,12 @@ def get_customer_name():
         else:
             return name
 
-def prompt_order_again():
+def prompt_order_again() -> bool:
+    """Asks the user if they would like to place another order.
+
+    Returns:
+        True if the user wants to place another order, False otherwise.
+    """
     while True:
         user_input = input("Would you like to make another order? [y/n]: ").strip()
         if user_input.lower() in ["y", "n"]:
@@ -50,6 +77,14 @@ def prompt_order_again():
         else:
             print("Invalid input. Try again.")
 
-def enumerate_list_to_dict(input_list: List):
-    """Function to get an enumerated dictionary (1 indexed) given a list. Integers are keys."""
+def enumerate_list_to_dict(input_list: List[Any]) -> dict[int, Any]:
+    """Converts a list into a dictionary with enumerated keys (1-indexed).
+
+    Args:
+        input_list: The list to be converted.
+
+    Returns:
+        A dictionary where the keys are integers starting from 1, and the values
+        are the corresponding elements from the input list.
+    """
     return dict(zip(range(1, len(input_list) + 1), input_list))

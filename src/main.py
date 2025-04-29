@@ -1,9 +1,19 @@
 from src.ordering_app import OrderingApp
 import os
 
-BASE_DEPARTMENT_DIR = "departments"
+BASE_DEPARTMENT_DIR = "departments" # base path for department json files
 
 def get_json_files_in_dir(directory_path: str):
+    """
+    Retrieves a list of JSON files located within a specified directory.
+
+    Args:
+        directory_path (str): The path to the directory to search.
+
+    Returns:
+        list: A list of strings, where each string is the full path to a JSON file in the directory.
+              Returns an empty list if the directory does not exist or if no JSON files are found.
+    """
     json_files = []
     try:
         # Check if the directory exists
@@ -23,6 +33,12 @@ def get_json_files_in_dir(directory_path: str):
     return json_files
 
 def main():
+    """
+    Main function that initializes and runs the OrderingApp.
+
+    It loads department data from JSON files located in the BASE_DEPARTMENT_DIR
+    and then executes the application routine.
+    """
     app = OrderingApp()
     app.load_departments(get_json_files_in_dir(BASE_DEPARTMENT_DIR))
     app.application_routine()
