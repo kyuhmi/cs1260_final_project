@@ -1,7 +1,7 @@
 from src.ordering_app import OrderingApp
 import os
 
-BASE_DEPARTMENT_DIR = "departments" # base path for department json files
+BASE_DEPARTMENT_DIR = "departments"  # base path for department json files
 
 def get_json_files_in_dir(directory_path: str):
     """
