@@ -1,16 +1,18 @@
 from typing import List
 import json
 
-from menus import get_option_from_user, enumerate_list_to_dict, get_item_quantity
+from src.customer import Customer
+from src.menus import get_option_from_user, enumerate_list_to_dict, get_item_quantity, get_customer_name
 from src.department import Department
 from src.order_item import OrderItem
+from src.receipt import Receipt
 
 ITEM_SELECTION_END_STR = "Done selecting items"
 
 class OrderingApp:
     def __init__(self):
         self.departments = []
-        self.order = dict()
+        self.item_quantities = dict()
 
     def application_routine(self):
         department = self.get_department()
@@ -25,12 +27,18 @@ class OrderingApp:
             item_quantity = get_item_quantity(item)
             if item_quantity > 0:
                 # non-zero quantity, add quantity to the current count in order
-                if item in self.order.keys():
-                    self.order[item] = self.order[item] + item_quantity
+                if item in self.item_quantities.keys():
+                    self.item_quantities[item] = self.item_quantities[item] + item_quantity
                 else:
-                    self.order[item] = item_quantity
+                    self.item_quantities[item] = item_quantity
 
-        print(self.order)
+        # get customer name and make obj
+        customer_name = get_customer_name()
+        customer = Customer(customer_name)
+
+        # create receipt
+        receipt = Receipt(department, self.item_quantities, customer)
+        print(receipt)
 
 
     def get_department(self):

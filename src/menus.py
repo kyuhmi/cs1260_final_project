@@ -31,6 +31,9 @@ def get_item_quantity(item: OrderItem):
         except ValueError:
             print("Could not parse number. Try again.")
 
+def get_customer_name():
+    return input("Enter customer name: ").strip()
+
 def enumerate_list_to_dict(input_list: List):
     """Function to get an enumerated dictionary (1 indexed) given a list. Integers are keys."""
     return dict(zip(range(1, len(input_list) + 1), input_list))
