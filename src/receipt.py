@@ -38,13 +38,15 @@ class Receipt:
         Returns:
             str: A string representation of the receipt.
         """
-        build_str = f"Customer: {self.customer}\nDepartment: {self.department}\n{self.timestamp.strftime("%Y-%m-%d %H:%M:%S")}"
-        build_str += "\n================="
-        cost_acc = 0.0
-        for item, quantity in self.item_quantities.items():
-            cost = item.price * quantity
-            build_str += f"\n{item.name} ({quantity}) = ${cost:.2f}"
-            cost_acc += cost
-        build_str += "\n================="
-        build_str += f"\nTotal: ${cost_acc:.2f}"
-        return build_str
+        timestamp_str = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        item_strings = [f"\n{item.name} ({quantity}) = ${item.price * quantity:.2f}"
+                        for item, quantity in self.item_quantities.items()]
+        total_cost = sum(item.price * quantity for item, quantity in self.item_quantities.items())
+
+        return (f"Customer: {self.customer}\n" +
+                f"Department: {self.department}\n" +
+                f"{timestamp_str}\n" +
+                "=================" +
+                "".join(item_strings) +
+                "\n=================\n" +
+                f"Total: ${total_cost:.2f}")
