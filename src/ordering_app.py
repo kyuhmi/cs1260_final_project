@@ -73,8 +73,8 @@ class OrderingApp:
 
                 # print receipt and write it to a file.
                 print(f"\n{receipt}\n")
-                self._write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True)
-                print("Written to file.\n")
+                if self._write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True):
+                    print(f"Written to {self.receipt_output_file}\n")
 
             # prompt order again
             if prompt_order_again():

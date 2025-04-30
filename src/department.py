@@ -31,3 +31,15 @@ class Department:
             str: The name of the department.
         """
         return self.name
+
+    def __lt__(self, other: 'Department') -> bool:
+        """
+        Compares two Department objects based on their names.
+
+        Args:
+            other (Department): The other Department object to compare to.
+
+        Returns:
+            bool: True if this department's name is less than the other department's name, False otherwise.
+        """
+        return self.name < other.name

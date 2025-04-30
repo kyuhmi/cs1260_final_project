@@ -28,6 +28,14 @@ class Receipt:
         self.customer = customer
         self.timestamp = datetime.datetime.now()
 
+    def calculate_total_cost(self):
+        """Calculates the total cost of all items in the receipt.
+
+        Returns:
+            float: The total cost of the receipt.
+        """
+        return sum(item.price * quantity for item, quantity in self.item_quantities.items())
+
     def __str__(self):
         """
         Returns a string representation of the receipt.
@@ -39,9 +47,10 @@ class Receipt:
             str: A string representation of the receipt.
         """
         timestamp_str = self.timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        sorted_items = sorted(self.item_quantities.items(), key=lambda x: x[0].name)
         item_strings = [f"\n{item.name} ({quantity}) = ${item.price * quantity:.2f}"
-                        for item, quantity in self.item_quantities.items()]
-        total_cost = sum(item.price * quantity for item, quantity in self.item_quantities.items())
+                        for item, quantity in sorted_items]
+        total_cost = self.calculate_total_cost()
 
         return (f"Customer: {self.customer}\n" +
                 f"Department: {self.department}\n" +

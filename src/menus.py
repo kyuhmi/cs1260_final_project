@@ -78,7 +78,7 @@ def prompt_order_again() -> bool:
             print("Invalid input. Try again.")
 
 def enumerate_list_to_dict(input_list: List[Any]) -> dict[int, Any]:
-    """Converts a list into a dictionary with enumerated keys (1-indexed).
+    """Converts a list into a dictionary with enumerated keys. 1-indexed in ascending order of list items.
 
     Args:
         input_list: The list to be converted.
@@ -87,4 +87,4 @@ def enumerate_list_to_dict(input_list: List[Any]) -> dict[int, Any]:
         A dictionary where the keys are integers starting from 1, and the values
         are the corresponding elements from the input list.
     """
-    return dict(zip(range(1, len(input_list) + 1), input_list))
+    return dict(zip(range(1, len(input_list) + 1), sorted(input_list)))
