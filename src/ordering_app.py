@@ -41,40 +41,10 @@ class OrderingApp:
         The main application routine that guides the user through the ordering process.
         The routine loops, allowing multiple orders until the user quits.
         """
-        if len(self.departments) == 0:
-            print("No departments available.")
-            return
-
         while True:
-            department = self._get_department_from_user()
-
-            while True:
-                item = self._get_item_from_department(department)
-                if item is None:
-                    break # done selecting items
-
-                item_quantity = get_item_quantity(item)
-                if item_quantity > 0:
-                    # non-zero quantity, add quantity to the current count in order
-                    if item in self.item_quantities.keys():
-                        self.item_quantities[item] = self.item_quantities[item] + item_quantity
-                    else:
-                        self.item_quantities[item] = item_quantity
-
-            if len(self.item_quantities) == 0:
-                print("Order cancelled.")
-            else:
-                # get customer name and make obj
-                customer_name = get_customer_name()
-                customer = Customer(customer_name)
-
-                # create receipt
-                receipt = Receipt(department, self.item_quantities, customer)
-
-                # print receipt and write it to a file.
-                print(f"\n{receipt}\n")
-                if self._write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True):
-                    print(f"Written to {self.receipt_output_file}\n")
+            if not self.make_order():
+                print("Exiting...")
+                break # stop on failure
 
             # prompt order again
             if prompt_order_again():
@@ -82,6 +52,57 @@ class OrderingApp:
                 continue
             else:
                 break
+
+    def make_order(self):
+        """
+        Allows a customer to create an order by selecting items from available departments.
+
+        The process involves:
+        1. Selecting a department.
+        2. Choosing items from the selected department and specifying quantities.
+        3. Gathering customer information.
+        4. Generating a receipt for the order.
+        5. Printing the receipt to the console and writing it to a file.
+
+        Returns:
+            bool: True if the order was successfully created and processed, False otherwise.
+        """
+        if len(self.departments) == 0:
+            print("No departments available.")
+            return False
+
+        department = self._get_department_from_user()
+
+        while True:
+            item = self._get_item_from_department(department)
+            if item is None:
+                break # done selecting items
+
+            item_quantity = get_item_quantity(item)
+            if item_quantity > 0:
+                # non-zero quantity, add quantity to the current count in order
+                if item in self.item_quantities.keys():
+                    self.item_quantities[item] = self.item_quantities[item] + item_quantity
+                else:
+                    self.item_quantities[item] = item_quantity
+
+        if len(self.item_quantities) == 0:
+            print("Order cancelled.")
+        else:
+            # get customer name and make obj
+            customer_name = get_customer_name()
+            customer = Customer(customer_name)
+
+            # create receipt
+            receipt = Receipt(department, self.item_quantities, customer)
+
+            # print receipt and write it to a file.
+            print(f"\n{receipt}\n")
+            if self._write_to_file(self.receipt_output_file, str(receipt) + "\n\n", True):
+                print(f"Written to {self.receipt_output_file}\n")
+            else:
+                return False # write failed
+        return True # success
 
     def _get_department_from_user(self):
         """
