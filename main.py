@@ -20,17 +20,14 @@ def parse_cl_args():
     parser.add_argument(
         "-d", "--directory",
         default=DEFAULT_DEPARTMENT_DIR,
-        help="Directory with department .json files")
+        help="directory with department .json files (optional)")
     parser.add_argument(
         "-o", "--output",
         default=DEFAULT_OUTPUT_FILE,
-        help="Output receipt of program execution")
+        help="output file for storing receipts (optional)")
 
     args = parser.parse_args()
-    department_dir = args.directory
-    output_file = args.output
-
-    return department_dir, output_file
+    return args.directory, args.output
 
 
 def main():
@@ -40,8 +37,7 @@ def main():
     This function creates an instance of the OrderingApp and starts its
     main application routine, which handles user interactions and order processing.
     """
-    department_dir, output_file = parse_cl_args()
-    app = OrderingApp(department_dir, output_file)
+    app = OrderingApp(*parse_cl_args()) # unpacking operator!
     app.application_routine()
 
 if __name__ == "__main__":
