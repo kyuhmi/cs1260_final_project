@@ -42,7 +42,8 @@ class OrderingApp:
         The routine loops, allowing multiple orders until the user quits.
         """
         while True:
-            if not self.make_order():
+            success = self.make_order()
+            if not success:
                 print("Exiting...")
                 break # stop on failure
 
@@ -66,6 +67,7 @@ class OrderingApp:
 
         Returns:
             bool: True if the order was successfully created and processed, False otherwise.
+                  If the order was cancelled, this will return True as well.
         """
         if len(self.departments) == 0:
             print("No departments available.")
