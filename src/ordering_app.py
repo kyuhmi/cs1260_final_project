@@ -27,9 +27,7 @@ class OrderingApp:
 
         Args:
             departments_base_dir (str, optional): The directory containing JSON files that define the departments and their inventory.
-                Defaults to "departments".
             receipt_output_file (str, optional): The name of the file to write receipts to.
-                Defaults to "grocery_orders.txt".
         """
         self.item_quantities = dict()
         self.receipt_output_file = receipt_output_file
