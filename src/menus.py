@@ -72,8 +72,9 @@ def prompt_order_again() -> bool:
     """
     while True:
         user_input = input("Would you like to make another order? [y/n]: ").strip()
-        if user_input.lower() in ["y", "n"]:
-            return True if user_input.lower() == "y" else False
+        # process only first character.
+        if user_input[0].lower() in ["y", "n"]:
+            return True if user_input[0].lower() == "y" else False
         else:
             print("Invalid input. Try again.")
 
