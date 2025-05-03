@@ -42,7 +42,7 @@ class OrderingApp:
         The routine loops, allowing multiple orders until the user quits.
         """
         while True:
-            success = self.make_order()
+            success = self._make_order()
             if not success:
                 print("Exiting...")
                 break # stop on failure
@@ -54,7 +54,7 @@ class OrderingApp:
             else:
                 break
 
-    def make_order(self):
+    def _make_order(self):
         """
         Allows a customer to create an order by selecting items from available departments.
 
