@@ -21,7 +21,7 @@ class OrderingApp:
         item_quantities (dict): A dictionary storing the quantities of each OrderItem in the current order. The keys are OrderItem objects and the values are the corresponding quantities.
         receipt_output_file (str): The file path where receipts will be written.
     """
-    def __init__(self, departments_base_dir: str = "departments", receipt_output_file: str = "grocery_orders.txt"):
+    def __init__(self, departments_base_dir: str, receipt_output_file: str):
         """
         Initializes the OrderingApp.
 
